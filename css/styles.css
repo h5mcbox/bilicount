@@ -1,0 +1,53 @@
+/* ===============================
+   Author: ProtossProbe
+   Date:   July 15, 2016
+
+   Notes:
+   Landing page for ProtossProbe
+
+   Colour Palette:
+   ---------------
+   Probe Blue:      #1B9FFB
+   Probe Yellow:    #FBD734
+   =============================== */
+
+
+/* General */
+
+body {}
+
+.text {
+    font-family: Verdana, 'Segoe UI', Geneva, Tahoma, sans-serif, "PingFang SC", "Hiragino Sans GB", "STHeiti", "Microsoft YaHei", "Microsoft JhengHei", "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN", "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC", "WenQuanYi Micro Hei";
+}
+
+.outer {
+    display: table;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.middle {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.inner {
+    margin-left: auto;
+    margin-right: auto;
+    width: 600px;
+    /*whatever width you want*/
+}
+
+.name {
+    color: crimson;
+    font-size: 80px;
+    font-weight: bold;
+}
+
+.number {
+    font-size: 100px;
+}

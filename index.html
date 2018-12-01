@@ -9,11 +9,8 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Normalize to clean up & standardize the browser default styles: http://necolas.github.io/normalize.css/ -->
-    <!-- <link rel="stylesheet" href="css/normalize.css"> -->
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/odometer-theme-minimal.css">
-    <script src="js/xdomain.min.js" slave="http://www.protossprobe.space/proxy.html"></script>
     <script src="js/jquery.min.js"></script>
     <script src="js/odometer.min.js"></script>
     <script>
@@ -36,22 +33,38 @@
         </div>
     </div>
     <script defer type="text/javascript">
-        console.log(window.location.pathname);
-        var url = "https://api.bilibili.com/x/web-interface/card?mid=250858633";
+        var id = window.location.search.substring(1);
+        var proxyUrl = "http://35.200.123.13:3300/jsonp";
+        var targetUrl = "https://api.bilibili.com/x/web-interface/card?mid=" + id;
         fetchName = function() {
-            $.getJSON(url,
-                function(json) {
+            $.ajax({
+                url: proxyUrl,
+                dataType: "jsonp",
+                data: {
+                    url: targetUrl
+                },
+                success: function(json) {
                     $('.name').html(json.data.card.name);
-                });
+                }
+            })
+
         }
         fetchData = function() {
-            $.getJSON(url,
-                function(json) {
+            $.ajax({
+                url: proxyUrl,
+                dataType: "jsonp",
+                data: {
+                    url: targetUrl
+                },
+                success: function(json) {
                     $('.odometer').html(json.data.card.fans);
-                });
+
+                }
+            })
         }
         fetchName();
-        setInterval(fetchData, 2000);
+        fetchData();
+        setInterval(fetchData, 3000);
     </script>
 
 

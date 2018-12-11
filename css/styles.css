@@ -16,6 +16,11 @@
 
 body {}
 
+html {
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
 .text {
     font-family: Verdana, 'Segoe UI', Geneva, Tahoma, sans-serif, "PingFang SC", "Hiragino Sans GB", "STHeiti", "Microsoft YaHei", "Microsoft JhengHei", "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN", "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC", "WenQuanYi Micro Hei";
 }
@@ -73,4 +78,8 @@ input.searchbar {
 
 ::-ms-input-placeholder {
     color: rgba(0, 0, 0, 0.1);
+}
+
+::-webkit-scrollbar {
+    display: none;
 }

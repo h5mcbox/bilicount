@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-
+<html>
 <head>
     <meta charset="utf-8">
     <title>Bilibili Fans</title>
@@ -14,19 +14,17 @@
     <script src="js/odometer.min.js"></script>
     <script>
         window.odometerOptions = {
-            format: '(,ddd).dd'
+            format: "(,ddd)"
         };
     </script>
 </head>
-
 <body>
     <div class="top">
         <input class="searchbar text" autocomplete="off" id="search" name="search" type="text" placeholder="请输入UP主的UID..." onfocus="this.placeholder = ''" onblur="this.placeholder = 'INPUT UID...'">
     </div>
     <div class="outer text">
         <div class="middle">
-            <div class="name" id="name">
-            </div>
+            <div class="name" id="name"></div>
             <div class="inner" id="number">
                 <div class="odometer number"></div>
             </div>
@@ -40,44 +38,41 @@
         } else {
             var proxyUrl = "http://35.200.123.13:3300/jsonp";
             var targetUrl = "https://api.bilibili.com/x/web-interface/card?mid=" + id;
-            fetchName = function() {
+            fetchName = function () {
                 $.ajax({
                     url: proxyUrl,
                     dataType: "jsonp",
                     data: {
                         url: targetUrl
                     },
-                    success: function(json) {
-                        $('.name').html(json.data.card.name);
+                    success: function (json) {
+                        $(".name").html(json.data.card.name);
                     }
-                })
-
+                });
             }
-            fetchData = function() {
+            fetchData = function () {
                 $.ajax({
                     url: proxyUrl,
                     dataType: "jsonp",
                     data: {
                         url: targetUrl
                     },
-                    success: function(json) {
-                        $('.odometer').html(json.data.card.fans);
-
+                    success: function (json) {
+                        $(".odometer").html(json.data.card.fans);
                     }
-                })
+                });
             }
             fetchName();
             fetchData();
-            $('html,body').animate({
+            $("html,body").animate({
                 scrollTop: $("#name").offset().top - $(window).height() / 2
             });
             setInterval(fetchData, 3000);
-
         }
     </script>
     <script type="text/javascript">
-        $(document).ready(function() {
-            $("#search").keyup(function(e) {
+        $(document).ready(function () {
+            $("#search").keyup(function (e) {
                 var kc = e.keyCode || e.which;
                 if (kc == 13) {
                     $("#search").addClass("button-search");
@@ -86,5 +81,5 @@
             });
         });
     </script>
-
 </body>
+</html>

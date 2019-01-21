@@ -14,8 +14,6 @@
 
 /* General */
 
-body {}
-
 html {
     overflow: scroll;
     overflow-x: hidden;
@@ -48,7 +46,7 @@ html {
 }
 
 .name {
-    color: crimson;
+    color: #E72C2C;
     font-size: 80px;
     font-weight: bold;
 }
@@ -61,7 +59,7 @@ input.searchbar {
     border: none;
     outline: 0;
     cursor: text;
-    caret-color: crimson;
+    caret-color: #E72C2C;
     color: rgba(0, 0, 0, 0.2);
     font-size: 80px;
     text-align: left;

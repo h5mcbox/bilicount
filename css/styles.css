@@ -14,35 +14,30 @@
 
 /* General */
 
-html {
-    overflow: scroll;
-    overflow-x: hidden;
-}
-
-.text {
-    font-family: Verdana, 'Segoe UI', Geneva, Tahoma, sans-serif, "PingFang SC", "Hiragino Sans GB", "STHeiti", "Microsoft YaHei", "Microsoft JhengHei", "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN", "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC", "WenQuanYi Micro Hei";
+body {
+    margin: 0;
+    font-family: Verdana, "Segoe UI", Geneva, Tahoma, sans-serif, "PingFang SC", "Hiragino Sans GB", "STHeiti", "Microsoft YaHei", "Microsoft JhengHei", "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN", "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC", "WenQuanYi Micro Hei";
 }
 
 .outer {
-    display: table;
     position: relative;
-    top: 0;
-    left: 0;
     height: 100vh;
-    width: 100vw;
+    width: 100%;
 }
 
 .middle {
-    display: table-cell;
-    vertical-align: middle;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     text-align: center;
 }
 
 .inner {
     margin-left: auto;
     margin-right: auto;
-    width: 600px;
-    /*whatever width you want*/
+    width: 100%;
 }
 
 .name {
@@ -55,9 +50,11 @@ html {
     font-size: 100px;
 }
 
-input.searchbar {
+#search {
     border: none;
-    outline: 0;
+    outline: none;
+    padding: 8px;
+    width: 100%;
     cursor: text;
     caret-color: #E72C2C;
     color: rgba(0, 0, 0, 0.2);
@@ -70,12 +67,40 @@ input.searchbar {
     color: rgba(0, 0, 0, 0.1);
 }
 
+::-webkit-input-placeholder {
+    color: rgba(0, 0, 0, 0.1);
+}
+
+:-moz-placeholder {
+    color: rgba(0, 0, 0, 0.1);
+}
+
+::-moz-placeholder {
+    color: rgba(0, 0, 0, 0.1);
+}
+
 :-ms-input-placeholder {
     color: rgba(0, 0, 0, 0.1);
 }
 
-::-ms-input-placeholder {
-    color: rgba(0, 0, 0, 0.1);
+:focus::placeholder {
+    color: transparent;
+}
+
+:focus::-webkit-input-placeholder {
+    color: transparent;
+}
+
+:focus:-moz-placeholder {
+    color: transparent;
+}
+
+:focus::-moz-placeholder {
+    color: transparent;
+}
+
+:focus:-ms-input-placeholder {
+    color: transparent;
 }
 
 ::-webkit-scrollbar {

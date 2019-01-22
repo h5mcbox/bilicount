@@ -10,7 +10,6 @@
 
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/odometer-theme-minimal.css">
-    <script src="js/jquery.min.js"></script>
     <script src="js/odometer.min.js"></script>
     <script>
         window.odometerOptions = {
@@ -26,60 +25,54 @@
         <div class="middle">
             <div class="name" id="name"></div>
             <div class="inner" id="number">
-                <div class="odometer number"></div>
+                <div class="odometer number" id="meter"></div>
             </div>
         </div>
     </div>
-    <script defer type="text/javascript">
-        var id = window.location.search.substring(1);
-        if (!id) {
-            $("#name").hide();
-            $("#number").hide();
-        } else {
-            var proxyUrl = "http://35.200.123.13:3300/jsonp";
-            var targetUrl = "https://api.bilibili.com/x/web-interface/card?mid=" + id;
-            fetchName = function () {
-                $.ajax({
-                    url: proxyUrl,
-                    dataType: "jsonp",
-                    data: {
-                        url: targetUrl
-                    },
-                    success: function (json) {
-                        $(".name").html(json.data.card.name);
-                    }
-                });
-            }
-            fetchData = function () {
-                $.ajax({
-                    url: proxyUrl,
-                    dataType: "jsonp",
-                    data: {
-                        url: targetUrl
-                    },
-                    success: function (json) {
-                        $(".odometer").html(json.data.card.fans);
-                    }
-                });
-            }
-            fetchName();
-            fetchData();
-            $("html,body").animate({
-                scrollTop: $("#name").offset().top - $(window).height() / 2
-            });
-            setInterval(fetchData, 3000);
-        }
-    </script>
     <script type="text/javascript">
-        $(document).ready(function () {
-            $("#search").keyup(function (e) {
-                var kc = e.keyCode || e.which;
-                if (kc == 13) {
-                    $("#search").addClass("button-search");
-                    window.location.href = "?" + this.value;
+        var proxyUrl = "http://35.200.123.13:3300/jsonp";
+
+        function sendRequest(targetUrl, callbackName) {
+            var script = document.createElement("script");
+            script.src = proxyUrl + "?callback=" + callbackName + "&url=" + encodeURIComponent(targetUrl);
+            document.body.appendChild(script);
+        }
+
+        window.onload = function () {
+            var search = document.getElementById("search");
+            var name = document.getElementById("name");
+            var number = document.getElementById("number");
+            var meter = document.getElementById("meter");
+            search.onkeyup = function (event) {
+                if (event.key === "Enter") {
+                    var value = parseInt(search.value, 10);
+                    if (value > 0) {
+                        search.classList.add("button-search");
+                        window.location.href = "?" + value;
+                    }
                 }
-            });
-        });
+            };
+            var id = parseInt(window.location.search.substring(1), 10);
+            if (id > 0) {
+                document.body.scrollTop = search.scrollHeight;
+                window.bilicount_init = function (response) {
+                    var cardData = response.data.card;
+                    name.innerText = cardData.name;
+                    meter.innerText = cardData.fans;
+                }
+                window.bilicount_update = function (response) {
+                    meter.innerText = response.data.card.fans;
+                }
+                var targetUrl = "https://api.bilibili.com/x/web-interface/card?mid=" + id;
+                sendRequest(targetUrl, "bilicount_init");
+                setInterval(function () {
+                    sendRequest(targetUrl, "bilicount_update");
+                }, 3000);
+            } else {
+                name.style.display = "none";
+                number.style.display = "none";
+            }
+        };
     </script>
 </body>
 </html>

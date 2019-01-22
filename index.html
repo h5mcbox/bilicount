@@ -7,6 +7,7 @@
     <!-- Meta Description for Search Engine Results -->
     <meta name="description" content="Bilibili Fans Count">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="pics/icon_probe.png">
 
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/odometer-theme-minimal.css">
@@ -38,7 +39,8 @@
             $("#name").hide();
             $("#number").hide();
         } else {
-            var proxyUrl = "http://35.200.123.13:3300/jsonp";
+            // var proxyUrl = "http://35.200.123.13:3300/jsonp";
+            var proxyUrl = "http://localhost:3300/jsonp"
             var targetUrl = "https://api.bilibili.com/x/web-interface/card?mid=" + id;
             fetchName = function() {
                 $.ajax({

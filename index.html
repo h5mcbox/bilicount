@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-
+<html>
 <head>
     <meta charset="utf-8">
     <title>Bilibili Fans</title>
@@ -11,82 +11,20 @@
 
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/odometer-theme-minimal.css">
-    <script src="js/jquery.min.js"></script>
     <script src="js/odometer.min.js"></script>
-    <script>
-        window.odometerOptions = {
-            format: '(,ddd).dd'
-        };
-    </script>
 </head>
-
 <body>
     <div class="top">
-        <input class="searchbar text" autocomplete="off" id="search" name="search" type="text" placeholder="请输入UP主的UID..." onfocus="this.placeholder = ''" onblur="this.placeholder = 'INPUT UID...'">
+        <input autocomplete="off" id="search" type="text" placeholder="请输入UP主的UID..." />
     </div>
-    <div class="outer text">
+    <div class="outer">
         <div class="middle">
-            <div class="name" id="name">
-            </div>
+            <div class="name" id="name"></div>
             <div class="inner" id="number">
-                <div class="odometer number"></div>
+                <div class="odometer number" id="meter"></div>
             </div>
         </div>
     </div>
-    <script defer type="text/javascript">
-        var id = window.location.search.substring(1);
-        if (!id) {
-            $("#name").hide();
-            $("#number").hide();
-        } else {
-            var proxyUrl = "http://35.200.123.13:3300/jsonp";
-            // var proxyUrl = "http://localhost:3300/jsonp"
-            var targetUrl = "https://api.bilibili.com/x/web-interface/card?mid=" + id;
-            fetchName = function() {
-                $.ajax({
-                    url: proxyUrl,
-                    dataType: "jsonp",
-                    data: {
-                        url: targetUrl
-                    },
-                    success: function(json) {
-                        $('.name').html(json.data.card.name);
-                    }
-                })
-
-            }
-            fetchData = function() {
-                $.ajax({
-                    url: proxyUrl,
-                    dataType: "jsonp",
-                    data: {
-                        url: targetUrl
-                    },
-                    success: function(json) {
-                        $('.odometer').html(json.data.card.fans);
-
-                    }
-                })
-            }
-            fetchName();
-            fetchData();
-            $('html,body').animate({
-                scrollTop: $("#name").offset().top - $(window).height() / 2
-            });
-            setInterval(fetchData, 3000);
-
-        }
-    </script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $("#search").keyup(function(e) {
-                var kc = e.keyCode || e.which;
-                if (kc == 13) {
-                    $("#search").addClass("button-search");
-                    window.location.href = "?" + this.value;
-                }
-            });
-        });
-    </script>
-
+    <script src="js/bilicount.js"></script>
 </body>
+</html>

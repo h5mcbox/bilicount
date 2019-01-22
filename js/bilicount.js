@@ -3,6 +3,9 @@ var proxyUrl = "http://35.200.123.13:3300/jsonp";
 function sendRequest(targetUrl, callbackName) {
     var script = document.createElement("script");
     script.src = proxyUrl + "?callback=" + callbackName + "&url=" + encodeURIComponent(targetUrl);
+    script.onload = function () {
+        document.body.removeChild(script);
+    }
     document.body.appendChild(script);
 }
 

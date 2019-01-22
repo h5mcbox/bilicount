@@ -39,8 +39,8 @@
             $("#name").hide();
             $("#number").hide();
         } else {
-            // var proxyUrl = "http://35.200.123.13:3300/jsonp";
-            var proxyUrl = "http://localhost:3300/jsonp"
+            var proxyUrl = "http://35.200.123.13:3300/jsonp";
+            // var proxyUrl = "http://localhost:3300/jsonp"
             var targetUrl = "https://api.bilibili.com/x/web-interface/card?mid=" + id;
             fetchName = function() {
                 $.ajax({

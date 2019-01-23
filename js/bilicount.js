@@ -1,14 +1,14 @@
-var proxyUrl = "http://35.200.123.13:3300/jsonp";
+var proxyUrl = "http://34.85.2.250:3300/jsonp";
+// var proxyUrl = "http://127.0.0.1:3300/jsonp";
 
 function sendRequest(targetUrl, callbackName) {
     var script = document.createElement("script");
-    script.src = proxyUrl + "?callback=" + callbackName + "&url=" + encodeURIComponent(targetUrl);
-    script.onload = function() {
-        document.body.removeChild(script);
-    }
-    document.body.appendChild(script);
+    script.src = proxyUrl + "?callback=" + callbackName +
+        "&url=" + encodeURIComponent(targetUrl);
+    script.onload = function() { document.body.removeChild(script); }
+    document
+        .body.appendChild(script);
 }
-
 
 window.onload = function() {
     var search = document.getElementById("search");
@@ -26,23 +26,23 @@ window.onload = function() {
     };
     var id = parseInt(window.location.search.substring(1), 10);
     if (id > 0) {
-        window.bilicount_init = function(response) {
-            var cardData = response.data.card;
-            name.innerText = cardData.name;
-            meter.innerText = cardData.fans;
-        }
-        window.bilicount_update = function(response) {
-            meter.innerText = response.data.card.fans;
-        }
-        var targetUrl = "https://api.bilibili.com/x/web-interface/card?mid=" + id;
+        window.bilicount_init =
+            function(response) {
+                var cardData = response.data.card;
+                name.innerText = cardData.name;
+                meter.innerText = cardData.fans;
+            }
+        window.bilicount_update =
+            function(response) {
+                meter.innerText = response.data.card.fans;
+            }
+        var targetUrl =
+            "https://api.bilibili.com/x/web-interface/card?mid=" + id;
 
         sendRequest(targetUrl, "bilicount_init");
-        setInterval(function() {
-            sendRequest(targetUrl, "bilicount_update");
-        }, 3000);
-        window.scrollTo({
-            top: document.body.scrollHeight,
-            behavior: 'smooth'
-        });
-    } else name.style.display = number.style.display = "none";
+        setInterval(function() { sendRequest(targetUrl, "bilicount_update"); },
+            5000);
+        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    } else
+        name.style.display = number.style.display = "none";
 };
